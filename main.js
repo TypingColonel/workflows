@@ -1,5 +1,19 @@
-function add(a, b) {
-    return a + b
-}
+const express = require("express");
+const app = express();
+const port = 3000;
 
-console.log(add(1, 3))
+app.get("/",
+    (
+        req,
+        res
+    ) => {
+        res.send("HELLLOOO");
+    }
+)
+
+app.listen(
+    port,
+    () => {
+        console.log("The app has started to run")
+    }
+)

@@ -23,5 +23,14 @@ jobs:
       - name: "install dependencies"  
         run: npm ci
       
-      - name: "run tests"
+      - name: "install golang"
+        uses: actions/setup-go@v5
+
+      - name: "display version"
+        run: go version
+      
+      - name: "run node server"
         run: node main
+      
+      - name: "get request from go client"
+        run: go run main.go
