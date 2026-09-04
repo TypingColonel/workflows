@@ -33,7 +33,7 @@ jobs:
         run: npm install -g pm2
     
       - name: "run node server"
-        run: pm2 start main.js
+        run: pm2 start main.js && sleep 10
       
       - name: "get request from go client"
         run: go run main.go
