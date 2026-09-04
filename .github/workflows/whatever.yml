@@ -29,6 +29,9 @@ jobs:
       - name: "display version"
         run: go version
       
+      - name: "install pm2"
+        run: npm install -g pm2
+    
       - name: "run node server"
         run: pm2 start main.js
       
