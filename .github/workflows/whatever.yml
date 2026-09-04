@@ -30,7 +30,7 @@ jobs:
         run: go version
       
       - name: "run node server"
-        run: node main
+        run: pm2 start main.js
       
       - name: "get request from go client"
         run: go run main.go
