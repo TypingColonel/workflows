@@ -1,0 +1,27 @@
+name: "hello this is yml"
+
+on: 
+  push:
+    branches: main
+  
+  pull_request:
+    branches: main
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: "Hii this is supposed to work"
+        uses: actions/checkout@4  
+        
+      - name: "setup nodejs"
+        uses: "actions/setup-node@v4"
+        with:
+          node-version: "22"
+        
+      - name: "install dependencies"  
+        run: npm ci
+      
+      - name: "run tests"
+        run: npm main.js
