@@ -8,6 +8,7 @@ app.get("/",
         res
     ) => {
         res.send("HELLLOOO");
+        console.log("someone logged in here");
     }
 )
 
