@@ -1,0 +1,38 @@
+name: Calculate Checksum
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  checksum:
+    runs-on: ubuntu-latest
+
+    outputs:
+      checksum: ${{ steps.checksum.outputs.checksum }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Calculate checksum
+        id: checksum
+        run: |
+          CHECKSUM=$(
+            shasum -a 256 main.go main.js package-lock.json package.json | shasum -a 256
+          )
+
+          echo "checksum=$CHECKSUM" >> "$GITHUB_OUTPUT"
+          echo "Checksum: $CHECKSUM"
+
+      - name: Save checksum
+        run: |
+          mkdir -p checksum
+          echo "${{ steps.checksum.outputs.checksum }}" > checksum/project.sha256
+
+      - name: Upload checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: checksum-${{ github.sha }}
+          path: checksum/project.sha256
